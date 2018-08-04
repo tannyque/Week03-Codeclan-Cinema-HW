@@ -1,8 +1,8 @@
-require('pg')
+require( 'pg' )
 
 class SqlRunner
 
-  def self.run(sq, values = [])
+  def self.run(sql, values = [])
     begin
       db = PG.connect({ dbname: 'cinema', host: 'localhost'})
       db.prepare("query", sql)
