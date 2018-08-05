@@ -71,17 +71,17 @@ class Customer
     values = [@id]
     SqlRunner.run(sql, values).count
   end
+  #
+  # def buy_ticket(film)
+  #   @funds -= film.price
+  #   update()
+  # end
 
   def buy_ticket(film)
-    @funds -= film.price
-    update()
+    sql = "UPDATE customers SET funds = funds - $1 WHERE id = $2"
+    values = [film.price, @id]
+    SqlRunner.run(sql, values)
+    Ticket.new({'customer_id' => @id, 'film_id' => film.id}).save()
   end
-
-  # def buy_ticket()
-  #   sql = "SELECT SUM(films.price) FROM tickets WHERE tickets.customer_id = $1"
-  #   values = [@id]
-  #   result = SqlRunner.run(sql, values).first
-  #   return @funds - result ['sum'].to_i()
-  # end
 
 end
