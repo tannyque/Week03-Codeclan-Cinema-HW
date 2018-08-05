@@ -24,4 +24,10 @@ class Film
     result = films_array.map { |film| Film.new(film) }
   end
 
+  def update()
+    sql = "UPDATE films SET (title, price) = ($1, $2) WHERE id = $3"
+    values = [@title, @price, @id]
+    SqlRunner.run(sql, values)
+  end
+
 end
