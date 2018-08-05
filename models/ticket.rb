@@ -44,4 +44,11 @@ class Ticket
     SqlRunner.run(sql)
   end
 
+  def self.find_by_id(id)
+    sql = "SELECT * FROM tickets WHERE id = $1"
+    values = [id]
+    results = SqlRunner.run(sql, values)
+    return results.map { |ticket| Ticket.new(ticket) }
+  end
+
 end

@@ -70,4 +70,19 @@ class Film
     #return result = [0]['count'].to_i()
   end
 
+  # def most_tickets_sold()
+  #   sql = 'SELECT screenings.* FROM films INNER JOIN screenings
+  #   ON films.id = screenings.film_id WHERE film_id = $1'
+  #   values = [@id]
+  #   result = SqlRunner.run(sql, values)
+  #   result.map { |screening|  Screening.new(screening) }
+  # end
+
+  def self.find_by_id(id)
+    sql = "SELECT * FROM films WHERE id = $1"
+    values = [id]
+    results = SqlRunner.run(sql, values)
+    return results.map { |film| Film.new(film) }
+  end
+
 end

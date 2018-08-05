@@ -84,4 +84,11 @@ class Customer
     Ticket.new({'customer_id' => @id, 'film_id' => film.id}).save()
   end
 
+  def self.find_by_id(id)
+    sql = "SELECT * FROM customers WHERE id = $1"
+    values = [id]
+    results = SqlRunner.run(sql, values)
+    return results.map { |customer| Customer.new(customer) }
+  end
+
 end
