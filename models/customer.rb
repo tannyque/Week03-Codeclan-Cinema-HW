@@ -72,6 +72,11 @@ class Customer
     SqlRunner.run(sql, values).count
   end
 
+  def buy_ticket(film)
+    @funds -= film.price
+    update()
+  end
+
   # def buy_ticket()
   #   sql = "SELECT SUM(films.price) FROM tickets WHERE tickets.customer_id = $1"
   #   values = [@id]
